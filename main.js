@@ -34,25 +34,21 @@ function launchButton() {
   element4.classList.add("rocket-takeoff-wrapper-animation");
 
   var element5 = document.getElementById("ultra-big");
-  var element6 = document.getElementById("video-play-button");
+  // var element6 = document.getElementById("video-play-button");
 
   element2.addEventListener("animationend", function () {
     // showing the text that rocket is launched
     element5.classList.add("disp-visible");
-    element6.classList.add("disp-visible");
+    // element6.classList.add("disp-visible");
   });
 
   var audio = new Audio("mixkit-sci-fi-rocket-engine-1723.wav");
-  audio.play();
 
-  var stars = document.getElementById("stars");
-  stars.outerHTML = '<div id="stars"></div>';
-  addStars();
-}
-
-function playVideo() {
   var element7 = document.getElementById("videoplayer");
-  element7.classList.add("disp-visible");
+
+  audio.addEventListener("ended", () => {
+    element7.classList.add("disp-visible");
+  });
 
   element7.addEventListener("playing", (event) => {
     const player = document.getElementById("videoplayer");
@@ -61,7 +57,20 @@ function playVideo() {
     else if (player.msRequestFullScreen) player.msRequestFullScreen();
   });
 
+  audio.play();
+
+  var stars = document.getElementById("stars");
+  stars.outerHTML = '<div id="stars"></div>';
+  addStars();
+}
+
+function delayPlay(element7) {
+  launchButton();
+  const player = document.getElementById("videoplayer");
+  if (player.requestFullscreen) player.requestFullscreen();
+  else if (player.webkitRequestFullscreen) player.webkitRequestFullscreen();
+  else if (player.msRequestFullScreen) player.msRequestFullScreen();
   setTimeout(function () {
-    element7.play();
-  });
+    player.play();
+  }, 8000);
 }
