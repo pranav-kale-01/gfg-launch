@@ -64,7 +64,7 @@ function launchButton() {
   addStars();
 }
 
-function delayPlay(element7) {
+function delayPlay() {
   launchButton();
   const player = document.getElementById("videoplayer");
   if (player.requestFullscreen) player.requestFullscreen();
